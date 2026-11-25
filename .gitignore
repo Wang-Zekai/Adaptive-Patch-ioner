@@ -1,0 +1,22 @@
+# External code, weights, datasets, and local runs
+/upstream/
+/assets/
+/data/
+/runs/
+/results/*
+!/results/main_results.csv
+!/results/ablation.csv
+
+# Environments, caches, and local secrets
+.conda/
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+*.zip
+*.h5
+*.pth
+*.pt
+*.safetensors
+*.log
