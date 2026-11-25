@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 758 449" role="img" aria-labelledby="title desc">
+<title id="title">Visual Genome test quality and latency</title>
+<desc id="desc">CIDEr scores for 5,000 held-out regions versus online latency from the 96-region timing audit.</desc>
+<rect width="758" height="449" fill="#fff"/>
+<g font-family="system-ui, sans-serif" font-size="13" fill="#333f4d">
+<text x="32" y="36" font-size="22" font-weight="650" fill="#172338">Visual Genome test quality and latency</text>
+<text x="32" y="61" fill="#53657a">5,000 held-out regions · 96-region online timing audit</text>
+<path d="M72.0 94 V371" stroke="#e6ebf0"/>
+<text x="72.0" y="392" text-anchor="middle">340</text>
+<path d="M177.8 94 V371" stroke="#e6ebf0"/>
+<text x="177.8" y="392" text-anchor="middle">360</text>
+<path d="M283.7 94 V371" stroke="#e6ebf0"/>
+<text x="283.7" y="392" text-anchor="middle">380</text>
+<path d="M389.5 94 V371" stroke="#e6ebf0"/>
+<text x="389.5" y="392" text-anchor="middle">400</text>
+<path d="M495.3 94 V371" stroke="#e6ebf0"/>
+<text x="495.3" y="392" text-anchor="middle">420</text>
+<path d="M601.2 94 V371" stroke="#e6ebf0"/>
+<text x="601.2" y="392" text-anchor="middle">440</text>
+<path d="M707.0 94 V371" stroke="#e6ebf0"/>
+<text x="707.0" y="392" text-anchor="middle">460</text>
+<path d="M72 343.3 H707" stroke="#e6ebf0"/>
+<text x="62" y="347.3" text-anchor="end">0.35</text>
+<path d="M72 287.9 H707" stroke="#e6ebf0"/>
+<text x="62" y="291.9" text-anchor="end">0.36</text>
+<path d="M72 232.5 H707" stroke="#e6ebf0"/>
+<text x="62" y="236.5" text-anchor="end">0.37</text>
+<path d="M72 177.1 H707" stroke="#e6ebf0"/>
+<text x="62" y="181.1" text-anchor="end">0.38</text>
+<path d="M72 121.7 H707" stroke="#e6ebf0"/>
+<text x="62" y="125.7" text-anchor="end">0.39</text>
+<path d="M72 94 V371 H707" fill="none" stroke="#95a3b3"/>
+<text x="390" y="425" text-anchor="middle">Mean inference time per region (ms)</text>
+<text x="22" y="231" text-anchor="middle" transform="rotate(-90,22,231)">CIDEr</text>
+<circle cx="155.8" cy="339.4" r="5" fill="#13675d" stroke="#fff"><title>Baseline: 0.35070 CIDEr, 355.8 ms</title></circle>
+<text x="164.8" y="331.4" text-anchor="start" font-size="11" fill="#13675d">Baseline</text>
+<circle cx="641.0" cy="218.7" r="5" fill="#65798e" stroke="#fff"><title>Fixed detail: 0.37248 CIDEr, 447.5 ms</title></circle>
+<text x="649.0" y="233.7" text-anchor="start" font-size="11" fill="#65798e">Fixed detail</text>
+<circle cx="423.3" cy="191.6" r="5" fill="#65798e" stroke="#fff"><title>Size-aware only: 0.37738 CIDEr, 406.4 ms</title></circle>
+<text x="431.3" y="207.6" text-anchor="start" font-size="11" fill="#65798e">Size-aware only</text>
+<circle cx="499.1" cy="169.3" r="5" fill="#65798e" stroke="#fff"><title>Boundary–semantic only: 0.38140 CIDEr, 420.7 ms</title></circle>
+<text x="507.1" y="157.3" text-anchor="start" font-size="11" fill="#65798e">Boundary–semantic only</text>
+<circle cx="630.9" cy="129.3" r="5" fill="#65798e" stroke="#fff"><title>Previous best: 0.38863 CIDEr, 445.6 ms</title></circle>
+<text x="638.9" y="117.3" text-anchor="start" font-size="11" fill="#65798e">Previous best</text>
+<circle cx="550.6" cy="128.9" r="5" fill="#13675d" stroke="#fff"><title>Quality: 0.38869 CIDEr, 430.4 ms</title></circle>
+<text x="542.6" y="116.9" text-anchor="end" font-size="11" fill="#13675d">Quality</text>
+<circle cx="401.8" cy="186.9" r="5" fill="#13675d" stroke="#fff"><title>Balanced: 0.37823 CIDEr, 402.3 ms</title></circle>
+<text x="392.8" y="206.9" text-anchor="end" font-size="11" fill="#13675d">Balanced</text>
+<circle cx="243.3" cy="306.6" r="5" fill="#13675d" stroke="#fff"><title>Efficient: 0.35662 CIDEr, 372.4 ms</title></circle>
+<text x="238.3" y="294.6" text-anchor="end" font-size="11" fill="#13675d">Efficient</text>
+<circle cx="409.3" cy="156.8" r="5" fill="#13675d" stroke="#fff"><title>Large-target fallback: 0.38366 CIDEr, 403.7 ms</title></circle>
+<text x="399.3" y="147.8" text-anchor="end" font-size="11" fill="#13675d">Large-target fallback</text>
+</g>
+</svg>

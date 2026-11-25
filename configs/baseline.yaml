@@ -1,0 +1,5 @@
+default_method: baseline
+methods:
+  baseline:
+    id: baseline
+    weight: 0

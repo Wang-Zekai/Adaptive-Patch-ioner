@@ -1,0 +1,136 @@
+default_method: balanced
+methods:
+  baseline:
+    id: baseline
+    weight: 0
+  fixed_detail:
+    id: fixed_detail
+    weight: 0.3
+  current_best:
+    id: current_best
+    weight_rule: piecewise
+    size_signal: mixed_support
+    limits:
+    - 0.24
+    - 0.58
+    weights:
+    - 0.3
+    - 0.8
+    - 0.5
+    detail_scale: 1.2
+    detail_resolution: 518
+    detail_pool:
+      method: overlap_semantic
+  quality:
+    id: D_asymmetric
+    weight_rule: piecewise
+    size_signal: mixed_support
+    limits:
+    - 0.24
+    - 0.58
+    weights:
+    - 0.3
+    - 0.8
+    - 0.5
+    detail_scale: 1.2
+    detail_resolution: 518
+    detail_pool:
+      method: overlap_semantic
+    original_pool:
+      method: residual
+      residual: 0.25
+  balanced:
+    id: G_selective_boundary
+    weight_rule: piecewise
+    size_signal: mixed_support
+    limits:
+    - 0.24
+    - 0.58
+    weights:
+    - 0.3
+    - 0.8
+    - 0.5
+    detail_scale: 1.2
+    detail_resolution: 518
+    detail_pool:
+      method: overlap_semantic
+    gate:
+      components:
+      - - mixed_support
+        - low
+      - - mean_cosine
+        - low
+      - - variance_cosine
+        - high
+      budget: 0.7
+      ranges:
+      - - 0.13416408002376556
+        - 1.0
+      - - 0.5693936944007874
+        - 0.8543006777763367
+      - - 0.005256963893771172
+        - 0.02952815406024456
+      threshold: 0.3944464325904846
+    original_pool:
+      method: residual
+      residual: 0.25
+  efficient:
+    id: C_visual_dispersion
+    weight_rule: piecewise
+    size_signal: mixed_support
+    limits:
+    - 0.24
+    - 0.58
+    weights:
+    - 0.3
+    - 0.8
+    - 0.5
+    detail_scale: 1.2
+    detail_resolution: 518
+    detail_pool:
+      method: overlap_semantic
+    gate:
+      components:
+      - - dispersion
+        - high
+      budget: 0.4
+      ranges:
+      - - 0.20091909170150757
+        - 0.9068150520324707
+      threshold: 0.7378646731376648
+  size_only:
+    id: size_only
+    weight_rule: piecewise
+    size_signal: mixed_support
+    limits:
+    - 0.24
+    - 0.58
+    weights:
+    - 0.3
+    - 0.8
+    - 0.5
+    detail_scale: 1.2
+    detail_resolution: 518
+  boundary_only:
+    id: boundary_only
+    weight: 0.3
+    detail_pool:
+      method: overlap_semantic
+  large_fallback:
+    id: B_best_large_fallback
+    weight_rule: piecewise
+    size_signal: mixed_support
+    limits:
+    - 0.24
+    - 0.58
+    weights:
+    - 0.3
+    - 0.8
+    - 0.5
+    detail_scale: 1.2
+    detail_resolution: 518
+    detail_pool:
+      method: overlap_semantic
+    gate:
+      fixed_signal: area_fraction
+      threshold: 0.1
