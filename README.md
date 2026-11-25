@@ -24,6 +24,7 @@ Balanced used a crop for 60.8% of test regions. Its paired image-level 95% inter
 
 - [Full test results](results/main_results.csv)
 - [Validation ablations](results/ablation.csv)
+- [Final-test detail-pooling ablation](results/pooling_ablation.csv)
 - [Method and evaluation protocol](docs/method.md)
 
 ## Setup
@@ -110,6 +111,19 @@ python experiments/refinement_report.py --stages test --root results/published_t
 
 The runner checks the final test manifest hash before applying the published lock. The first command generates the quality scores and the initial 24-region online measurements. The second measures a separate 96-region timing sample. Use `results/published_test/test/per_region.csv` for all individual predictions and `results/published_test/test/parts/<method_id>.json` for one method. The identifiers for the size-aware control and previous best are `size_only` and `current_best`.
 
+### Detail-pooling ablation
+
+On the same final test split, keep size-aware fusion fixed and vary only the pooling weights on the detail crop. The overall CIDEr scores for uniform, overlap-area, and overlap–semantic pooling are 0.37598, 0.37738, and 0.38863. The [paired results](results/pooling_ablation.csv) include all size groups and 95% intervals.
+
+After generating the published test scores, run the missing uniform configuration and rescore all three variants with Stanford PTB tokenization.
+
+```bash
+python scripts/run_uniform_ablation.py --archived-scores results/published_test/test/scores.json --batch-size 8 --output-dir runs/pooling_ablation
+python scripts/summarize_pooling_ablation.py runs/pooling_ablation/scores.json > runs/pooling_ablation/paired_cider.csv
+```
+
+The first command resumes from its output directory. `--manifest` and `--image-root` accept alternate local data paths. Use `--limit 8` with a separate output directory for a smoke test.
+
 To rerun validation, ablations, and the original experiment sequence
 
 ```bash
@@ -149,6 +163,7 @@ Adaptive-Patch-ioner/
 | --- | --- |
 | [`configs/baseline.yaml`](configs/baseline.yaml) | Runs the original Patch-ioner model. |
 | [`configs/adaptive.yaml`](configs/adaptive.yaml) | Defines the nine released methods and defaults to Balanced for single-box inference. |
+| [`configs/pooling_ablation.yaml`](configs/pooling_ablation.yaml) | Fixes the fusion settings for the three detail-pooling variants. |
 | [`configs/exploration.json`](configs/exploration.json) | Sets the seed, split paths, search budget, metrics, and candidate groups for the earlier study. |
 | [`configs/refinement.json`](configs/refinement.json) | Sets the refinement splits, seeds, metrics, timing budget, and bootstrap settings. |
 | [`configs/exploration_published_lock.json`](configs/exploration_published_lock.json) | Records the earlier test policies, including the fixed comparator used in refinement. |
@@ -174,6 +189,8 @@ Adaptive-Patch-ioner/
 | [`scripts/setup.ps1`](scripts/setup.ps1) | Launches setup from Windows PowerShell. |
 | [`scripts/setup_assets.py`](scripts/setup_assets.py) | Installs dependencies and fetches or verifies pinned upstream code and model assets. |
 | [`scripts/evaluate.py`](scripts/evaluate.py) | Runs single-image inference or scores the released methods on a local region manifest. |
+| [`scripts/run_uniform_ablation.py`](scripts/run_uniform_ablation.py) | Generates uniform-pooling captions and jointly scores them with archived predictions. |
+| [`scripts/summarize_pooling_ablation.py`](scripts/summarize_pooling_ablation.py) | Exports paired CIDEr differences and image-level bootstrap intervals. |
 | [`scripts/plot_results.py`](scripts/plot_results.py) | Rebuilds the quality–latency SVG from a main results CSV. |
 
 ### Experiment files
@@ -212,6 +229,7 @@ Adaptive-Patch-ioner/
 | --- | --- |
 | [`results/main_results.csv`](results/main_results.csv) | Holds all nine test results, size-group scores, confidence intervals, and 96-region timings. |
 | [`results/ablation.csv`](results/ablation.csv) | Holds validation ablations with overall and size-group scores. |
+| [`results/pooling_ablation.csv`](results/pooling_ablation.csv) | Holds final-test detail-pooling scores and paired 95% intervals. |
 | [`figures/quality_latency.svg`](figures/quality_latency.svg) | Plots the released test results against audited online latency. |
 | [`docs/method.md`](docs/method.md) | Describes the fusion method, frozen presets, data splits, and evaluation protocol. |
 

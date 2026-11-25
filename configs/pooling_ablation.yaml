@@ -1,0 +1,25 @@
+# Use with scripts/evaluate.py --method all.
+default_method: current_best
+methods:
+  baseline:
+    id: baseline
+    weight: 0
+  uniform_detail:
+    <<: &shared
+      weight_rule: piecewise
+      size_signal: mixed_support
+      limits: [0.24, 0.58]
+      weights: [0.3, 0.8, 0.5]
+      detail_scale: 1.2
+      detail_resolution: 518
+      original_pool: {method: official}
+    id: uniform_detail
+    detail_pool: {method: mean}
+  size_only:
+    <<: *shared
+    id: size_only
+    detail_pool: {method: overlap}
+  current_best:
+    <<: *shared
+    id: current_best
+    detail_pool: {method: overlap_semantic}
