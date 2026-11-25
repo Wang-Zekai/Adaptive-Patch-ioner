@@ -1,0 +1,14 @@
+{
+  "seed": 20261125,
+  "screen_size": 240,
+  "image_batch_size": 6,
+  "decode_batch_size": 48,
+  "survivors_per_family": 2,
+  "online_sample_size": 24,
+  "validation_manifest": "data/vg_val_1000/manifest.json",
+  "test_manifest": "data/vg_test_2000/manifest.json",
+  "metrics": ["CIDEr", "BLEU", "ROUGE_L", "METEOR"],
+  "prior_controls": ["baseline", "detail_only", "A_w0p3", "prior_context_fusion", "prior_multiscale_fusion"],
+  "h_sources": ["baseline", "detail_only", "A_w0p3", "prior_multiscale_fusion"],
+  "h_policies": ["H_original_likelihood", "H_detail_likelihood", "H_joint_likelihood", "H_decoder_confidence", "H_consensus", "H_joint_consensus"]
+}

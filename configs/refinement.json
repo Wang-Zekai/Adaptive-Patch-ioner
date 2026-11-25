@@ -1,0 +1,17 @@
+{
+  "seed": 20261126,
+  "bootstrap_seed": 20261126,
+  "bootstrap_resamples": 10000,
+  "validation_manifest": "data/vg_val_1000/manifest.json",
+  "previous_test_manifest": "data/vg_test_2000/manifest.json",
+  "final_test_manifest": "data/vg_test_5000/manifest.json",
+  "screen_manifest": "results/exploration/screen_manifest.json",
+  "minimum_test_regions": 5000,
+  "image_batch_size": 8,
+  "decode_batch_size": 48,
+  "validation_survivors_per_family": 2,
+  "online_sample_size": 24,
+  "extra_latency_target": 0.2,
+  "metrics": ["CIDEr", "BLEU", "ROUGE_L", "METEOR"],
+  "rerank_methods": ["H_original_likelihood", "H_detail_likelihood", "H_decoder_confidence", "H_consensus", "F_weighted_joint"]
+}

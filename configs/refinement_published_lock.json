@@ -1,0 +1,250 @@
+{
+  "roles": {
+    "Quality": "D_asymmetric",
+    "Balanced": "G_selective_boundary",
+    "Efficient": "C_visual_dispersion"
+  },
+  "configs": [
+    {
+      "id": "baseline",
+      "family": "B",
+      "weight": 0,
+      "history_id": "baseline"
+    },
+    {
+      "id": "fixed_detail",
+      "family": "B",
+      "weight": 0.3,
+      "history_id": "A_w0p3"
+    },
+    {
+      "id": "current_best",
+      "family": "B",
+      "weight_rule": "piecewise",
+      "size_signal": "mixed_support",
+      "limits": [
+        0.24,
+        0.58
+      ],
+      "weights": [
+        0.3,
+        0.8,
+        0.5
+      ],
+      "detail_scale": 1.2,
+      "detail_resolution": 518,
+      "detail_pool": {
+        "method": "overlap_semantic"
+      },
+      "history_id": "J_dynamic_boundary"
+    },
+    {
+      "id": "D_asymmetric",
+      "family": "D",
+      "weight_rule": "piecewise",
+      "size_signal": "mixed_support",
+      "limits": [
+        0.24,
+        0.58
+      ],
+      "weights": [
+        0.3,
+        0.8,
+        0.5
+      ],
+      "detail_scale": 1.2,
+      "detail_resolution": 518,
+      "detail_pool": {
+        "method": "overlap_semantic"
+      },
+      "original_pool": {
+        "method": "residual",
+        "residual": 0.25
+      }
+    },
+    {
+      "id": "G_selective_boundary",
+      "family": "G",
+      "weight_rule": "piecewise",
+      "size_signal": "mixed_support",
+      "limits": [
+        0.24,
+        0.58
+      ],
+      "weights": [
+        0.3,
+        0.8,
+        0.5
+      ],
+      "detail_scale": 1.2,
+      "detail_resolution": 518,
+      "detail_pool": {
+        "method": "overlap_semantic"
+      },
+      "gate": {
+        "components": [
+          [
+            "mixed_support",
+            "low"
+          ],
+          [
+            "mean_cosine",
+            "low"
+          ],
+          [
+            "variance_cosine",
+            "high"
+          ]
+        ],
+        "budget": 0.7,
+        "ranges": [
+          [
+            0.13416408002376556,
+            1.0
+          ],
+          [
+            0.5693936944007874,
+            0.8543006777763367
+          ],
+          [
+            0.005256963893771172,
+            0.02952815406024456
+          ]
+        ],
+        "threshold": 0.3944464325904846
+      },
+      "original_pool": {
+        "method": "residual",
+        "residual": 0.25
+      }
+    },
+    {
+      "id": "C_visual_dispersion",
+      "family": "C",
+      "weight_rule": "piecewise",
+      "size_signal": "mixed_support",
+      "limits": [
+        0.24,
+        0.58
+      ],
+      "weights": [
+        0.3,
+        0.8,
+        0.5
+      ],
+      "detail_scale": 1.2,
+      "detail_resolution": 518,
+      "detail_pool": {
+        "method": "overlap_semantic"
+      },
+      "gate": {
+        "components": [
+          [
+            "dispersion",
+            "high"
+          ]
+        ],
+        "budget": 0.4,
+        "ranges": [
+          [
+            0.20091909170150757,
+            0.9068150520324707
+          ]
+        ],
+        "threshold": 0.7378646731376648
+      }
+    },
+    {
+      "id": "size_only",
+      "family": "B",
+      "weight_rule": "piecewise",
+      "size_signal": "mixed_support",
+      "limits": [
+        0.24,
+        0.58
+      ],
+      "weights": [
+        0.3,
+        0.8,
+        0.5
+      ],
+      "detail_scale": 1.2,
+      "detail_resolution": 518,
+      "history_id": "C_piecewise_mixed_support"
+    },
+    {
+      "id": "boundary_only",
+      "family": "B",
+      "weight": 0.3,
+      "detail_pool": {
+        "method": "overlap_semantic"
+      },
+      "history_id": "G_detail_overlap_semantic"
+    },
+    {
+      "id": "B_best_large_fallback",
+      "family": "B",
+      "weight_rule": "piecewise",
+      "size_signal": "mixed_support",
+      "limits": [
+        0.24,
+        0.58
+      ],
+      "weights": [
+        0.3,
+        0.8,
+        0.5
+      ],
+      "detail_scale": 1.2,
+      "detail_resolution": 518,
+      "detail_pool": {
+        "method": "overlap_semantic"
+      },
+      "gate": {
+        "fixed_signal": "area_fraction",
+        "threshold": 0.1
+      }
+    }
+  ],
+  "decision": {
+    "balanced_rule": "lowest relative latency increase per CIDEr gain, because no candidate met the latency target",
+    "validation_target_max_extra_latency": 0.2,
+    "validation_measurements": {
+      "baseline": {
+        "CIDEr": 0.34654810430002353,
+        "large_CIDEr": 0.43293530956253495,
+        "online_ms": 258.53180416622007
+      },
+      "D_asymmetric": {
+        "CIDEr": 0.39636683733161254,
+        "large_CIDEr": 0.4902331443342521,
+        "online_ms": 440.65735416370444
+      },
+      "G_selective_boundary": {
+        "CIDEr": 0.39023869178049003,
+        "large_CIDEr": 0.4892414249482889,
+        "online_ms": 371.761829170282
+      },
+      "C_visual_dispersion": {
+        "CIDEr": 0.3821318446375733,
+        "large_CIDEr": 0.5078595419060974,
+        "online_ms": 356.315441664871
+      }
+    }
+  },
+  "runner_version": "14923e28d838fa9405929a66436346b512066f18590b8cd1309d80748d60e9ff",
+  "primary_metric": "CIDEr",
+  "secondary_metrics": [
+    "CIDEr",
+    "BLEU",
+    "ROUGE_L",
+    "METEOR"
+  ],
+  "test_manifest_sha256": "0492e52c445b484dfa3848a1b7c7aa858915d02a2b046e4eab5750c8297d74b1",
+  "val_scores_sha256": "fd3b4f5b2fb4921421b44e4db5c5cb5bb965edb451b8deaa9980bcfe41034c9b",
+  "bootstrap_unit": "image",
+  "paired": true,
+  "bootstrap_seed": 20261126,
+  "bootstrap_resamples": 10000,
+  "test_unseen_during_selection": true
+}

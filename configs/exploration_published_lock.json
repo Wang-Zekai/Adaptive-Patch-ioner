@@ -1,0 +1,36 @@
+{
+  "configs": [
+    {
+      "id": "baseline",
+      "family": "A",
+      "weight": 0
+    },
+    {
+      "id": "A_w0p3",
+      "family": "A",
+      "weight": 0.3
+    },
+    {
+      "id": "J_dynamic_boundary",
+      "family": "J",
+      "weight_rule": "piecewise",
+      "size_signal": "mixed_support",
+      "limits": [
+        0.24,
+        0.58
+      ],
+      "weights": [
+        0.3,
+        0.8,
+        0.5
+      ],
+      "detail_pool": "overlap_semantic"
+    }
+  ],
+  "validation_sources": [
+    "validation",
+    "combinations"
+  ],
+  "selection_metric": "overall CIDEr",
+  "test_unseen_during_selection": true
+}
