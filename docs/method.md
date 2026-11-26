@@ -31,3 +31,17 @@ The refinement study screened 75 configurations on 240 validation regions, then 
 The 96-region timing audit was run after warmup in rotating method order. The CUDA peak is allocated GPU memory, which differs from the amount reserved by the allocator. In the audit, two online captions differed by one word from their batch-evaluation captions. Both differences occurred in the same region. The original batch scores are reported in the tables.
 
 Test and validation CSVs include CIDEr, BLEU-1 through BLEU-4, ROUGE-L, and METEOR. RefPAC-S was not evaluated in this study. Visual Genome images, annotations, and the experimental prediction cache are not distributed here.
+
+## Final-test detail-pooling ablation
+
+The ablation uses the same 5,000 regions and 512 images as the published test. All three variants use the official full-image pool, a 1.2× detail crop resized to 518 × 518, and the same size-aware fusion weights. Each variant pools the patches with positive target overlap.
+
+| Variant | Detail-crop pooling |
+| --- | --- |
+| A (`uniform_detail`) | Equal weight per patch |
+| B (`size_only`) | Weight proportional to target overlap area |
+| C (`current_best`) | Overlap area multiplied by the center-reference semantic term |
+
+The run generates A with crop batches of up to eight and uses the published predictions for B and C. All predictions are paired by region and rescored with Stanford PTB tokenization and the same CIDEr document frequencies. The two differences use 10,000 paired bootstrap draws at the image level. The size-group intervals use no multiple-comparison adjustment.
+
+Overall, B − A is +0.00140 CIDEr (95% interval [−0.00228, +0.00500]) and C − B is +0.01125 ([−0.00190, +0.02421]). The largest C − B gain is on small targets (+0.03292, [+0.01593, +0.05014]). See the [full results](../results/pooling_ablation.csv) and [reproduction commands](../README.md#detail-pooling-ablation).

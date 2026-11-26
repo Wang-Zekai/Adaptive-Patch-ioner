@@ -6,6 +6,7 @@
 /results/*
 !/results/main_results.csv
 !/results/ablation.csv
+!/results/pooling_ablation.csv
 
 # Environments, caches, and local secrets
 .conda/
